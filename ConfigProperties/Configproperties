@@ -1,0 +1,13 @@
+platformName=Android
+deviceName=Medium_Phone_API_36
+appPackage=com.mventus.ncell.activity
+appActivity=com.mventus.ncell.activity.MainActivity
+noReset=true
+automationName=UiAutomator2
+appiumServer=http://127.0.0.1:4723/wd/hub
+name=History
+PIN=1234567890333444
+number=9701373199
+a=10
+e=9846088144
+d=i am

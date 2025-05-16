@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-05-08T14:55:25 NPT" name="Default suite" finished-at="2025-05-08T15:03:20 NPT" duration-ms="474391">
+    <groups>
+    </groups>
+    <test started-at="2025-05-08T14:55:25 NPT" name="Default test" finished-at="2025-05-08T15:03:20 NPT" duration-ms="474391">
+      <class name="Test.BuyDataPackTest">
+        <test-method is-config="true" signature="initializeReport()[pri:0, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T14:55:24 NPT" name="initializeReport" finished-at="2025-05-08T14:55:25 NPT" duration-ms="1261" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeReport -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T14:55:25 NPT" name="setup" finished-at="2025-05-08T14:56:16 NPT" duration-ms="50710" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method is-config="true" signature="setUpPage()[pri:0, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T14:56:16 NPT" name="setUpPage" finished-at="2025-05-08T14:56:17 NPT" duration-ms="459" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpPage -->
+        <test-method signature="testRenewalPack()[pri:1, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T14:56:17 NPT" name="testRenewalPack" finished-at="2025-05-08T14:59:12 NPT" duration-ms="175093" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRenewalPack -->
+        <test-method signature="testDoubleData()[pri:2, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T14:59:12 NPT" name="testDoubleData" finished-at="2025-05-08T14:59:53 NPT" duration-ms="41129" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDoubleData -->
+        <test-method signature="testTopSellers()[pri:3, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T14:59:53 NPT" name="testTopSellers" finished-at="2025-05-08T15:00:27 NPT" duration-ms="33729" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTopSellers -->
+        <test-method signature="sidhaon()[pri:4, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:00:27 NPT" name="sidhaon" finished-at="2025-05-08T15:01:02 NPT" duration-ms="34921" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sidhaon -->
+        <test-method signature="onethreedays()[pri:5, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:01:02 NPT" name="onethreedays" finished-at="2025-05-08T15:01:30 NPT" duration-ms="27856" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- onethreedays -->
+        <test-method signature="testSevenDay()[pri:6, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:01:30 NPT" name="testSevenDay" finished-at="2025-05-08T15:01:57 NPT" duration-ms="27229" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSevenDay -->
+        <test-method signature="testTwentyEightDays()[pri:7, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:01:57 NPT" name="testTwentyEightDays" finished-at="2025-05-08T15:02:49 NPT" duration-ms="52158" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTwentyEightDays -->
+        <test-method signature="testEightyFourDays()[pri:8, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:02:49 NPT" name="testEightyFourDays" finished-at="2025-05-08T15:03:16 NPT" duration-ms="27188" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEightyFourDays -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:03:16 NPT" name="tearDown" finished-at="2025-05-08T15:03:20 NPT" duration-ms="3633" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="closeReport()[pri:0, instance:Test.BuyDataPackTest@53aad5d5]" started-at="2025-05-08T15:03:20 NPT" name="closeReport" finished-at="2025-05-08T15:03:21 NPT" duration-ms="754" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeReport -->
+      </class> <!-- Test.BuyDataPackTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
