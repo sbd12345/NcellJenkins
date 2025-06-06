@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import Base.BaseTest;
 import Pages.RoamingPage;
-import utility.EmailUtil;
+
 
 import Listeners.CustomTestListener;
 
@@ -36,14 +36,5 @@ public class RoamingTest extends BaseTest {
         }
     }
 
-    @AfterSuite
-    public static void sendAutomationReports() {
-        try {
-            logger.info("Preparing to send test reports via email");
-            EmailUtil.sendReportsWithLogs();
-            logger.info("Test reports email sent successfully");
-        } catch (Exception e) {
-            logger.error("Failed to send test reports email", e);
-        }
-    }
+  
 }

@@ -12,17 +12,3 @@ a=10
 e=9846088144
 d=i am
 
-email.host=smtp.gmail.com
-email.port=587
-email.username=basnetsameer33@gmail.com
-email.password=eoffpdqhorrczkwx
-email.from=basnetsameer33@gmail.com
-email.to=basnetsameer755@gmail.com
-
-email.subject=Test Execution Report - ${timestamp}
-email.body=Hi,\n\nPlease find the latest test execution reports at the links below:1\n\nRegards,\nQA Team
-
-
-report.extent=C:\\Users\\User\\eclipse-workspace\\NcellAPP\\Extent Report\\ExtentReport.html
-report.excel=C:\\Users\\User\\eclipse-workspace\\NcellAPP\\Excel Report\\test_results.xlsx
-report.log=C:\\Users\\User\\eclipse-workspace\\NcellAPP\\logs\\test-log.log

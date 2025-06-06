@@ -9,7 +9,6 @@ import org.testng.Assert;
 
 import Base.BaseTest;
 import Pages.BestOfferPage;
-import utility.EmailUtil;
 import Listeners.CustomTestListener;
 
 @Listeners(CustomTestListener.class)
@@ -31,17 +30,7 @@ public class BestOfferTest extends BaseTest {
         }
     }
 
-    @AfterSuite
-   public static void sendAutomationReports() {
-        try {
-            logger.info("Preparing to send test reports via email");
-            EmailUtil.sendReportsWithLogs();
-            logger.info("Test reports email sent successfully");
-        } catch (Exception e) {
-            logger.error("Failed to send test reports email", e);
-        }
-    }     
-}
+    }
 
 
 

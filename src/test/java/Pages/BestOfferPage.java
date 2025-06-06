@@ -45,7 +45,7 @@ public class BestOfferPage {
     private final By noLocator = MobileBy.AccessibilityId("NO");
     private final By detailLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Details\"])[1]");
     private final By buyPackLocator1 = MobileBy.xpath("//android.widget.Button[@content-desc=\"BUY\"]/android.view.ViewGroup/android.view.View");
-
+    private final By back = MobileBy.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ImageView");
     public void openBestOffer() {
         try {
         	Thread.sleep(10000);
@@ -65,6 +65,7 @@ public class BestOfferPage {
             clickElement(noLocator, "No Button to Close Confirmation");
             clickElement(detailLocator, "Details");
             clickElement(buyPackLocator1, "Buy Button in Details");
+            clickElement(back, "Back");
             reuse();
         } catch (Exception e) {
             logger.error("Error in bestoffer flow: {}", e.getMessage());

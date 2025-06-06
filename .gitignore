@@ -1,0 +1,4 @@
+AppData/ 
+target/ 
+*.class 
+*.log 

@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 import Base.BaseTest;
 import Pages.TakeSaapatiPage;
-import utility.EmailUtil;
 import Listeners.CustomTestListener;
 
 @Listeners(CustomTestListener.class)
@@ -27,17 +26,6 @@ public class TakeSaapatiTest extends BaseTest {
         } catch (Exception e) {
             logger.error("Take Saapati test failed: {}", e.getMessage(), e);
             throw e;
-        }
-    }
-
-    @AfterSuite
-    public static void sendAutomationReports() {
-        try {
-            logger.info("Preparing to send test reports via email");
-            EmailUtil.sendReportsWithLogs();
-            logger.info("Test reports email sent successfully");
-        } catch (Exception e) {
-            logger.error("Failed to send test reports email", e);
         }
     }
 }
