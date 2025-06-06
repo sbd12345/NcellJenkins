@@ -65,6 +65,9 @@ public class BestOfferPage {
             clickElement(noLocator, "No Button to Close Confirmation");
             clickElement(detailLocator, "Details");
             clickElement(buyPackLocator1, "Buy Button in Details");
+            clickElement(paymentMethodLocator, "Pay By Balance");
+            clickElement(confirmLocator, "Confirm Payment");
+            clickElement(noLocator, "No Button to Close Confirmation");
             clickElement(back, "Back");
             reuse();
         } catch (Exception e) {
