@@ -69,7 +69,6 @@ public class BestOfferPage {
             clickElement(confirmLocator, "Confirm Payment");
             clickElement(noLocator, "No Button to Close Confirmation");
             clickElement(back, "Back");
-            reuse();
         } catch (Exception e) {
             logger.error("Error in bestoffer flow: {}", e.getMessage());
             takeScreenshot("bestoffer_error");
