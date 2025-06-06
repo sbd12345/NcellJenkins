@@ -6,27 +6,40 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import utility.EmailUtil;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BeemaPackPage {
+
+    private static final Logger logger = LogManager.getLogger(BeemaPackPage.class);
 
     private final AndroidDriver<MobileElement> driver;
     private final WebDriverWait wait;
 
     public BeemaPackPage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 40);
+        this.wait = new WebDriverWait(driver, 80);
     }
-
-    // --- Locators ---
+    
     private final By beemapackLocator = MobileBy.AccessibilityId("Beema Packs");
-    private final By downArrowLocator = MobileBy.xpath("//android.view.ViewGroup[@resource-id=\"card-container\"]");
     private final By buyPackLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Buy Pack\"])[1]/android.view.ViewGroup");
     private final By paymentMethodLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"Pay By Balance\"]");
     private final By confirmLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"Confirm\"]");
@@ -34,34 +47,36 @@ public class BeemaPackPage {
     private final By detailLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Details\"])[1]");
     private final By buyPackLocator1 = MobileBy.xpath("//android.widget.Button[@content-desc=\"Buy pack\"]/android.view.ViewGroup/android.view.View");
 
-    // --- Public flows ---
-
     public void beemapack() {
         try {
-            clickElementWithSwipe(downArrowLocator, "Down Arrow");
-            clickElementWithSwipe(beemapackLocator, "beemapack");
+            logger.info("Attempting to locate and click Beema Pack using swipe.");
+            clickElementWithSwipe(beemapackLocator, "Beema Pack");
         } catch (Exception e) {
+            logger.error("Error in beemapack(): {}", e.getMessage(), e);
         }
     }
 
-    public void beema() {
-    	clickElement(beemapackLocator, "beemapack");
+    public void beema() throws InterruptedException {
+        logger.info("Starting beema() pack purchase flow.");
+        clickElement(beemapackLocator, "Beema Pack");
         clickElement(buyPackLocator, "Buy Pack");
+        Thread.sleep(19000);
+        clickElement(buyPackLocator, "Buy Pack");       
         clickElement(paymentMethodLocator, "Pay By Balance");
         clickElement(confirmLocator, "Confirm Payment");
         clickElement(noLocator, "No Button to Close Confirmation");
         clickElement(detailLocator, "Details");
         clickElement(buyPackLocator1, "Buy Button in Details");
+
         reuse();
     }
 
     public void reuse() {
+        logger.info("Reusing payment flow in reuse() method.");
         clickElement(paymentMethodLocator, "Pay By Balance");
         clickElement(confirmLocator, "Confirm Payment");
         clickElement(noLocator, "No Button to Close Confirmation");
     }
-
-    // --- Core utilities ---
 
     private void clickElementWithSwipe(By locator, String name) {
         int maxSwipes = 5;
@@ -74,19 +89,21 @@ public class BeemaPackPage {
                     MobileElement element = elements.get(0);
                     if (element.isDisplayed()) {
                         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-                        System.out.println("Clicked on " + name);
+                        logger.info("Clicked on: {}", name);
                         found = true;
                         break;
                     }
                 }
+                logger.debug("Element '{}' not found, swiping up... (Attempt {})", name, i + 1);
                 swipeUp();
                 waitAfterSwipe();
             } catch (Exception e) {
-                System.out.println("Swipe " + (i + 1) + " for " + name + " failed: " + e.getMessage());
+                logger.warn("Swipe {} for {} failed: {}", i + 1, name, e.getMessage(), e);
             }
         }
 
         if (!found) {
+            logger.error("{} not found after {} swipes.", name, maxSwipes);
             Assert.fail(name + " not found after " + maxSwipes + " swipes.");
         }
     }
@@ -95,8 +112,9 @@ public class BeemaPackPage {
         try {
             MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(locator));
             element.click();
-            System.out.println("Clicked on: " + name);
+            logger.info("Clicked on: {}", name);
         } catch (Exception e) {
+            logger.error("Failed to click on {}: {}", name, e.getMessage(), e);
             Assert.fail("Failed to click on " + name + ": " + e.getMessage());
         }
     }
@@ -108,6 +126,7 @@ public class BeemaPackPage {
         int startY = (int) (height * 0.8);
         int endY = (int) (height * 0.3);
 
+        logger.debug("Performing swipe up gesture.");
         new TouchAction<>(driver)
                 .press(PointOption.point(startX, startY))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(300)))
@@ -118,9 +137,35 @@ public class BeemaPackPage {
 
     private void waitAfterSwipe() {
         try {
-            Thread.sleep(25000);
+            Thread.sleep(8000);
         } catch (InterruptedException e) {
+            logger.warn("Interrupted during swipe wait", e);
             Thread.currentThread().interrupt();
+        }
+    }
+    
+    public void takeScreenshot(String screenshotName) {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
+
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String destinationPath = "screenshots/" + screenshotName + "_" + timestamp + ".png";
+
+        File screenshotDirectory = new File("screenshots");
+        if (!screenshotDirectory.exists()) {
+            boolean dirCreated = screenshotDirectory.mkdirs();
+            if (dirCreated) {
+                logger.info("Screenshots directory created.");
+            } else {
+                logger.warn("Failed to create screenshots directory.");
+            }
+        }
+
+        try {
+            Files.copy(srcFile.toPath(), Paths.get(destinationPath));
+            logger.info("Screenshot saved at: {}", destinationPath);
+        } catch (IOException e) {
+            logger.error("Failed to save screenshot: {}", e.getMessage());
         }
     }
 }

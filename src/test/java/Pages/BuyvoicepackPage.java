@@ -8,170 +8,181 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class BuyvoicepackPage {
 
     private final AndroidDriver<MobileElement> driver;
+    private final WebDriverWait wait;
     private final String screenshotPath;
+    private static final Logger logger = LoggerFactory.getLogger(BuyvoicepackPage.class);
 
     public BuyvoicepackPage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, 30);
         this.screenshotPath = System.getProperty("user.dir") + "/screenshots/";
     }
 
     private final By voiceLocator = MobileBy.AccessibilityId("Buy Voice Packs");
     private final By allProductLocator = MobileBy.AccessibilityId("All Products");
-    private final By specialofferLocator = MobileBy.AccessibilityId("Special Offer");
-    private final By hourlyonedayLocator = MobileBy.AccessibilityId("Hourly - 1 Day");
-    private final By threetosevendayLocator = MobileBy.AccessibilityId("3 - 7 Days");
-    private final By twentyeightdayLocator = MobileBy.AccessibilityId("28 Days");
-    private final By eightyfourdayLocator = MobileBy.AccessibilityId("84 Days");
-    private final By indiaildLocator = MobileBy.AccessibilityId("India + ILD");
-    private final By renewelLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"28 Day Renewal\"])[1]");
+    private final By specialOfferLocator = MobileBy.AccessibilityId("Special Offer");
+    private final By hourlyOneDayLocator = MobileBy.AccessibilityId("Hourly - 1 Day");
+    private final By threeToSevenDayLocator = MobileBy.AccessibilityId("3 - 7 Days");
+    private final By twentyEightDayLocator = MobileBy.AccessibilityId("28 Days");
+    private final By eightyFourDayLocator = MobileBy.AccessibilityId("84 Days");
+    private final By indiaIldLocator = MobileBy.AccessibilityId("India + ILD");
+    private final By renewalLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"28 Day Renewal\"])[1]");
     private final By paymentMethodLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"Pay By Balance\"]");
     private final By confirmLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"Confirm\"]");
     private final By cancelLocator = MobileBy.xpath("//android.widget.Button[@content-desc=\"Cancel\"]/android.view.ViewGroup");
-    private final By daysOneTimeLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"28 Day One Time\"])[1]/android.view.ViewGroup");
+    private final By twentyEightDayOneTimeLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"28 Day One Time\"])[1]/android.view.ViewGroup");
     private final By buyPackLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Buy Pack\"])[1]/android.view.ViewGroup");
-    private final By buyPackLocator1 = MobileBy.xpath("//android.widget.Button[@content-desc=\"Buy pack\"]/android.view.ViewGroup/android.view.View");
+    private final By buyPackLocatorDetails = MobileBy.xpath("//android.widget.Button[@content-desc=\"Buy pack\"]/android.view.ViewGroup/android.view.View");
     private final By noLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"NO\"]/android.view.ViewGroup");
     private final By detailLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Details\"])[1]");
-    private final By bpLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"Buy Pack\"]/android.view.ViewGroup");
-    private final By dLocator = MobileBy.AccessibilityId("Details");
+    private final By buyPackLocatorSimple = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"Buy Pack\"]/android.view.ViewGroup");
+    private final By detailSimpleLocator = MobileBy.AccessibilityId("Details");
 
-    public void allproduct() {
-        Clickvoice(voiceLocator, "Buy Voice Packs");
+    // --- Public flows ---
+
+    public void allProductFlow() {
+        clickElementWithSwipe(voiceLocator, "Buy Voice Packs");
         try {
             clickElement(allProductLocator, "All Products");
-            clickElement(renewelLocator, "28 Day Renewal");
+            clickElement(renewalLocator, "28 Day Renewal");
             Thread.sleep(3000);
-            clickElement(cancelLocator, "Cancel Button");
-            clickElement(daysOneTimeLocator, "28 Day One Time");
+            clickElement(cancelLocator, "Cancel");
+            clickElement(twentyEightDayOneTimeLocator, "28 Day One Time");
             Thread.sleep(3000);
-            clickElement(buyPackLocator1, "Buy Button");
+            clickElement(buyPackLocatorDetails, "Buy Button");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm Payment");
             clickElement(noLocator, "No Button");
-
         } catch (Exception e) {
-            takeScreenshot("voiceallproductError");
-            Assert.fail("Failed in voiceallproduct: " + e.getMessage());
+            takeScreenshot("allProductFlowError");
+            Assert.fail("Failed in allProductFlow: " + e.getMessage());
         }
     }
 
-    public void specialoffer() {
+    public void specialOfferFlow() {
         try {
-            clickElement(specialofferLocator, "Special Offer");
+            clickElement(specialOfferLocator, "Special Offer");
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
             clickElement(noLocator, "No Button");
             clickElement(detailLocator, "Details");
-            completePurchaseFlow1();
+            completePurchaseFlow();
         } catch (Exception e) {
-            takeScreenshot("specialproductError");
-            Assert.fail("Failed in specialproduct: " + e.getMessage());
+            takeScreenshot("specialOfferFlowError");
+            Assert.fail("Failed in specialOfferFlow: " + e.getMessage());
         }
     }
 
-    public void hourlyoneday() {
+    public void hourlyOneDayFlow() {
         try {
             Thread.sleep(5000);
-            clickElement(hourlyonedayLocator, "Hourly - 1 Day");
+            clickElement(hourlyOneDayLocator, "Hourly - 1 Day");
             Thread.sleep(7000);
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
             clickElement(noLocator, "No Button");
             clickElement(detailLocator, "Details");
-            completePurchaseFlow1();
+            completePurchaseFlow();
         } catch (Exception e) {
-            takeScreenshot("hourError");
-            Assert.fail("Failed in hour1day: " + e.getMessage());
+            takeScreenshot("hourlyOneDayFlowError");
+            Assert.fail("Failed in hourlyOneDayFlow: " + e.getMessage());
         }
     }
 
-    public void threetosevenday() {
+    public void threeToSevenDayFlow() {
         try {
-
-            clickElement(threetosevendayLocator, "3 - 7 Days");
-        	Thread.sleep(8000);
+            clickElement(threeToSevenDayLocator, "3 - 7 Days");
+            Thread.sleep(8000);
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
             clickElement(noLocator, "No Button");
             clickElement(detailLocator, "Details");
-            completePurchaseFlow1();
+            completePurchaseFlow();
         } catch (Exception e) {
-            takeScreenshot("threetosevenError");
-            Assert.fail("Failed in threetosevenday: " + e.getMessage());
+            takeScreenshot("threeToSevenDayFlowError");
+            Assert.fail("Failed in threeToSevenDayFlow: " + e.getMessage());
         }
     }
 
-    public void twentyeightdays() {
+    public void twentyEightDaysFlow() {
         try {
-            clickElement(twentyeightdayLocator, "28 Days");
-           	Thread.sleep(8000);
-            clickElement(renewelLocator, "28 Day Renewal");
+            clickElement(twentyEightDayLocator, "28 Days");
+            Thread.sleep(8000);
+            clickElement(renewalLocator, "28 Day Renewal");
             Thread.sleep(3000);
             clickElement(cancelLocator, "Cancel");
-            clickElement(daysOneTimeLocator, "28 Day One Time");
+            clickElement(twentyEightDayOneTimeLocator, "28 Day One Time");
             Thread.sleep(3000);
-            completePurchaseFlow1();
+            completePurchaseFlow();
         } catch (Exception e) {
-            takeScreenshot("voice28daysError");
-            Assert.fail("Failed in voice28days: " + e.getMessage());
+            takeScreenshot("twentyEightDaysFlowError");
+            Assert.fail("Failed in twentyEightDaysFlow: " + e.getMessage());
         }
     }
 
-    public void eightyfourdays() {
+    public void eightyFourDaysFlow() {
         try {
-            clickElement(eightyfourdayLocator, "84 Days");
-        	Thread.sleep(8000);
-            clickElement(bpLocator, "Buy Pack");
+            clickElement(eightyFourDayLocator, "84 Days");
+            Thread.sleep(8000);
+            clickElement(buyPackLocatorSimple, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
             clickElement(noLocator, "No Button");
-            clickElement(dLocator, "Details");
-            completePurchaseFlow1();
+            clickElement(detailSimpleLocator, "Details");
+            completePurchaseFlow();
         } catch (Exception e) {
-            takeScreenshot("eightyfourError");
-            Assert.fail("Failed in eightyfourday: " + e.getMessage());
+            takeScreenshot("eightyFourDaysFlowError");
+            Assert.fail("Failed in eightyFourDaysFlow: " + e.getMessage());
         }
     }
 
-    public void indiailddays() {
+    public void indiaIldFlow() {
         try {
-            clickElement(indiaildLocator, "India + ILD");
-        	Thread.sleep(8000);
+            clickElement(indiaIldLocator, "India + ILD");
+            Thread.sleep(8000);
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
             clickElement(noLocator, "No Button");
             clickElement(detailLocator, "Details");
-            completePurchaseFlow1();
+            completePurchaseFlow();
         } catch (Exception e) {
-            takeScreenshot("indiaildError");
-            Assert.fail("Failed in indiaild: " + e.getMessage());
+            takeScreenshot("indiaIldFlowError");
+            Assert.fail("Failed in indiaIldFlow: " + e.getMessage());
         }
     }
 
-    private void completePurchaseFlow1() throws InterruptedException {
-        clickElement(buyPackLocator1, "Buy Button in Details");
+    // --- Private utility methods ---
+
+    private void completePurchaseFlow() throws InterruptedException {
+        clickElement(buyPackLocatorDetails, "Buy Button in Details");
         clickElement(paymentMethodLocator, "Pay By Balance");
         clickElement(confirmLocator, "Confirm");
         clickElement(noLocator, "No Button");
     }
 
-    private void Clickvoice(By locator, String name) {
+    private void clickElementWithSwipe(By locator, String name) {
         int maxSwipes = 8;
         boolean found = false;
 
@@ -182,15 +193,16 @@ public class BuyvoicepackPage {
                     MobileElement element = elements.get(0);
                     if (element.isDisplayed()) {
                         element.click();
+                        logger.info("Clicked on {}", name);
                         found = true;
                         break;
                     }
                 }
-                System.out.println("Swipe " + (i + 1) + ": '" + name + "' not visible yet.");
+                logger.info("Swipe {}: '{}' not visible yet.", (i + 1), name);
                 swipeUp();
                 waitAfterSwipe();
             } catch (Exception e) {
-                System.out.println("Swipe failed at attempt " + (i + 1) + ": " + e.getMessage());
+                logger.warn("Swipe failed at attempt {}: {}", (i + 1), e.getMessage());
             }
         }
 
@@ -223,31 +235,40 @@ public class BuyvoicepackPage {
         }
     }
 
-    private void takeScreenshot(String fileName) {
+    public void takeScreenshot(String screenshotName) {
         try {
-            File screenshot = driver.getScreenshotAs(OutputType.FILE);
-            File destinationFile = new File(screenshotPath + fileName + ".png");
-            Files.createDirectories(destinationFile.getParentFile().toPath());
-            Files.copy(screenshot.toPath(), destinationFile.toPath());
-            System.out.println("Screenshot saved: " + destinationFile.getAbsolutePath());
+            File srcFile = driver.getScreenshotAs(OutputType.FILE);
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+            String destinationPath = screenshotPath + screenshotName + "_" + timestamp + ".png";
+
+            File screenshotDirectory = new File(screenshotPath);
+            if (!screenshotDirectory.exists()) {
+                boolean dirCreated = screenshotDirectory.mkdirs();
+                if (dirCreated) {
+                    logger.info("Screenshots directory created.");
+                } else {
+                    logger.warn("Failed to create screenshots directory.");
+                }
+            }
+
+            Files.copy(srcFile.toPath(), Paths.get(destinationPath));
+            logger.info("Screenshot saved at: {}", destinationPath);
         } catch (IOException e) {
-            System.out.println("Screenshot error: " + e.getMessage());
+            logger.error("Failed to save screenshot: {}", e.getMessage());
         } catch (Exception e) {
-            System.out.println("Unexpected error while taking screenshot: " + e.getMessage());
+            logger.error("Unexpected error while taking screenshot: {}", e.getMessage());
         }
     }
 
     private void clickElement(By locator, String elementName) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
-            MobileElement element = (MobileElement) wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(locator));
             element.click();
-            System.out.println("Clicked: " + elementName);
+            logger.info("Clicked: {}", elementName);
         } catch (Exception e) {
             takeScreenshot("Error_" + elementName.replace(" ", "_"));
             Assert.fail("Failed to click on: " + elementName + " - " + e.getMessage());
         }
     }
 }
-
-   
+  

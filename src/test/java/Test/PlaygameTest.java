@@ -3,13 +3,19 @@ package Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.annotations.AfterSuite;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Base.BaseTest;
 import Pages.PlaygamePage;
+import utility.EmailUtil;
 import Listeners.CustomTestListener;
 
 @Listeners(CustomTestListener.class)
 public class PlaygameTest extends BaseTest {
 
+    private static final Logger logger = LogManager.getLogger(PlaygameTest.class);
     private PlaygamePage playgamePage;
 
     @BeforeClass
@@ -19,37 +25,98 @@ public class PlaygameTest extends BaseTest {
 
     @Test(priority = 1)
     public void testOpenPoliceGame() {
-        playgamePage.openPoliceGame();
+        try {
+            logger.info("Starting test: testOpenPoliceGame");
+            playgamePage.openPoliceGame();
+            logger.info("testOpenPoliceGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenPoliceGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Test(priority = 2)
     public void testOpenChangaChaitGame() {
-        playgamePage.openChangaChaitGame();
-    }
-
-    @Test(priority = 7)
-    public void testOpenTimberGuyGame() {
-        playgamePage.openTimberGuyGame();
-    }
-
-    @Test(priority = 4)
-    public void testOpenStickyGooGame() {
-        playgamePage.openStickyGooGame();
-    }
-
-    @Test(priority = 5)
-    public void testOpenLudoWithFriendsGame() {
-        playgamePage.openLudoWithFriendsGame();
-    }
-
-    @Test(priority = 6)
-    public void testOpenCarromHeroGame() {
-        playgamePage.openCarromHeroGame();
+        try {
+            logger.info("Starting test: testOpenChangaChaitGame");
+            playgamePage.openChangaChaitGame();
+            logger.info("testOpenChangaChaitGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenChangaChaitGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Test(priority = 3)
     public void testOpenCandyFiestaGame() {
-        playgamePage.openCandyFiestaGame();
+        try {
+            logger.info("Starting test: testOpenCandyFiestaGame");
+            playgamePage.openCandyFiestaGame();
+            logger.info("testOpenCandyFiestaGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenCandyFiestaGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @Test(priority = 4)
+    public void testOpenStickyGooGame() {
+        try {
+            logger.info("Starting test: testOpenStickyGooGame");
+            playgamePage.openStickyGooGame();
+            logger.info("testOpenStickyGooGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenStickyGooGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @Test(priority = 5)
+    public void testOpenLudoWithFriendsGame() {
+        try {
+            logger.info("Starting test: testOpenLudoWithFriendsGame");
+            playgamePage.openLudoWithFriendsGame();
+            logger.info("testOpenLudoWithFriendsGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenLudoWithFriendsGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @Test(priority = 6)
+    public void testOpenCarromHeroGame() {
+        try {
+            logger.info("Starting test: testOpenCarromHeroGame");
+            playgamePage.openCarromHeroGame();
+            logger.info("testOpenCarromHeroGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenCarromHeroGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @Test(priority = 7)
+    public void testOpenTimberGuyGame() {
+        try {
+            logger.info("Starting test: testOpenTimberGuyGame");
+            playgamePage.openTimberGuyGame();
+            logger.info("testOpenTimberGuyGame completed successfully");
+        } catch (Exception e) {
+            logger.error("testOpenTimberGuyGame failed: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @AfterSuite
+    public static void sendAutomationReports() {
+        try {
+            logger.info("Preparing to send test reports via email");
+            EmailUtil.sendReportsWithLogs();
+            logger.info("Test reports email sent successfully");
+        } catch (Exception e) {
+            logger.error("Failed to send test reports email", e);
+        }
     }
 }
+
 

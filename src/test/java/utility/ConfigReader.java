@@ -9,7 +9,7 @@ public class ConfigReader {
 
     static {
         try {
-            FileInputStream fis = new FileInputStream("C:\\Users\\User\\eclipse-workspace\\app\\ConfigProperties\\Configproperties");
+            FileInputStream fis = new FileInputStream("C:\\Users\\User\\eclipse-workspace\\NcellAPP\\ConfigProperties\\Configproperties");
             properties = new Properties();
             properties.load(fis);
         } catch (IOException e) {

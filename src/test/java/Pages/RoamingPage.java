@@ -6,21 +6,37 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class RoamingPage {
 
     private final AndroidDriver<MobileElement> driver;
     private final WebDriverWait wait;
+    private static final Logger logger = LogManager.getLogger(RoamingPage.class);
 
     public RoamingPage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 40);
+        logger.info("Initialized RoamingPage");
     }
 
     // --- Locators ---
@@ -37,40 +53,48 @@ public class RoamingPage {
     private final By buyPackLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Buy Pack\"])[1]/android.view.ViewGroup");
     private final By detailLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Details\"])[1]");
     private final By buyPackLocator1 = MobileBy.xpath("//android.widget.Button[@content-desc=\"Buy pack\"]/android.view.ViewGroup/android.view.View");
-  //  private final By faqLocator = MobileBy.AccessibilityId("FAQ");
     private final By noLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"NO\"]/android.view.ViewGroup");
+
     // --- Public flow ---
     public void performRoamingPackFlow() {
         try {
-        	clickElementWithSwipe(downArrowLocator, "Down Arrow");
+            clickElementWithSwipe(downArrowLocator, "Down Arrow");
             clickElementWithSwipe(roamingLocator, "Roaming Tab");
-            clickElement(closeLocator, "close");
+            clickElement(closeLocator, "Close Button");
+
             Thread.sleep(5000);
+
             clickElement(indiaLocator, "India Button");
+
             Thread.sleep(15000);
+
             clickElement(sortByPriceLocator, "Sort by Price");
             clickElement(lowToHighLocator, "Low to High");
             clickElement(validityLocator, "Validity Filter");
             clickElement(daysLocator, "4-7 Days Filter");
+
             Thread.sleep(10000);
+
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm Payment");
             clickElement(noLocator, "No Button to Close Confirmation");
             clickElement(detailLocator, "Details");
             clickElement(buyPackLocator1, "Buy Button in Details");
+
             reuse();
-        //    clickElement(faqLocator , "faq");
 
         } catch (Exception e) {
+            logger.error("Roaming pack flow failed: {}", e.getMessage(), e);
+            takeScreenshot("RoamingPackFlow_Failure");
             Assert.fail("Roaming pack flow failed: " + e.getMessage());
         }
     }
 
     public void reuse() {
-    	 clickElement(paymentMethodLocator, "Pay By Balance");
-         clickElement(confirmLocator, "Confirm Payment");
-         clickElement(noLocator, "No Button to Close Confirmation");
+        clickElement(paymentMethodLocator, "Pay By Balance");
+        clickElement(confirmLocator, "Confirm Payment");
+        clickElement(noLocator, "No Button to Close Confirmation");
     }
 
     // --- Utility methods ---
@@ -84,18 +108,19 @@ public class RoamingPage {
                 List<MobileElement> elements = driver.findElements(locator);
                 if (!elements.isEmpty() && elements.get(0).isDisplayed()) {
                     wait.until(ExpectedConditions.elementToBeClickable(elements.get(0))).click();
-                    System.out.println("Clicked on: " + name);
+                    logger.info("Clicked on: {}", name);
                     found = true;
                     break;
                 }
                 swipeUp();
                 waitAfterSwipe();
             } catch (Exception e) {
-                System.out.println("Swipe " + (i + 1) + " for " + name + " failed: " + e.getMessage());
+                logger.warn("Swipe {} for {} failed: {}", i + 1, name, e.getMessage());
             }
         }
 
         if (!found) {
+            takeScreenshot(name + "_NotFound");
             Assert.fail(name + " not found after " + maxSwipes + " swipes.");
         }
     }
@@ -104,8 +129,10 @@ public class RoamingPage {
         try {
             MobileElement element = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(locator));
             element.click();
-            System.out.println("Clicked on: " + name);
+            logger.info("Clicked on: {}", name);
         } catch (Exception e) {
+            logger.error("Failed to click on {}: {}", name, e.getMessage());
+            takeScreenshot("ClickFailed_" + name.replaceAll("\\s+", "_"));
             Assert.fail("Failed to click on " + name + ": " + e.getMessage());
         }
     }
@@ -123,6 +150,8 @@ public class RoamingPage {
                 .moveTo(PointOption.point(startX, endY))
                 .release()
                 .perform();
+
+        logger.debug("Performed swipe up");
     }
 
     private void waitAfterSwipe() {
@@ -130,6 +159,20 @@ public class RoamingPage {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        }
+    }
+
+    private void takeScreenshot(String name) {
+        try {
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+            String filename = "screenshots/" + name + "_" + timestamp + ".png";
+
+            Files.createDirectories(Paths.get("screenshots"));
+            Files.copy(srcFile.toPath(), Paths.get(filename));
+            logger.info("Saved screenshot: {}", filename);
+        } catch (IOException e) {
+            logger.error("Failed to save screenshot: {}", e.getMessage());
         }
     }
 }

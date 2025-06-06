@@ -6,24 +6,30 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class BuyDataPackPage {
 
     private final AndroidDriver<MobileElement> driver;
-    private final String screenshotPath;
+    private static final Logger logger = LogManager.getLogger(BuyDataPackPage.class);
 
     public BuyDataPackPage(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
-        this.screenshotPath = System.getProperty("user.dir") + "/screenshots/";
     }
 
     private final By DatapackLocator = MobileBy.AccessibilityId("Buy Data Packs");
@@ -46,7 +52,7 @@ public class BuyDataPackPage {
     private final By buyPackLocator1 = MobileBy.xpath("//android.widget.Button[@content-desc=\"Buy pack\"]/android.view.ViewGroup/android.view.View");
     private final By noLocator = MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"NO\"]/android.view.ViewGroup");
     private final By detailLocator = MobileBy.xpath("(//android.view.ViewGroup[@content-desc=\"Details\"])[1]");
- 
+
     public void renewelpack() {
         ClickDataPack(DatapackLocator, "Datapack");
         try {
@@ -55,7 +61,7 @@ public class BuyDataPackPage {
             clickElement(sevendaysrenewelpackLocator, "sevendaysrenewelpack");
             clickElement(cancelLocator, "Cancel Button");
             clickElement(sevendaysonetimerenewelpackLocator, "sevendaysonetimerenewel");
-            clickElement(buyPackLocator1,"buyPack");
+            clickElement(buyPackLocator1, "buyPack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm Payment");
             clickElement(noLocator, "No Button");
@@ -73,20 +79,20 @@ public class BuyDataPackPage {
             clickElement(thirtydayrenewelLocator, "thirtydayrenewel");
             clickElement(cancelLocator, "Cancel Button");
             clickElement(thirtydayonetimeLocator, "thirtydayonetimeLocator");
-            clickElement(buyPackLocator1,"buyPack");
+            clickElement(buyPackLocator1, "buyPack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm Payment");
             clickElement(noLocator, "No Button");
-            
+
         } catch (Exception e) {
-            takeScreenshot(" doubleDataError");
+            takeScreenshot("doubleDataError");
             Assert.fail("Failed in doubleData: " + e.getMessage());
         }
     }
 
     public void Topsellers() {
         try {
-            clickElement(topsellersLocator , "topsellers");
+            clickElement(topsellersLocator, "topsellers");
             Thread.sleep(8000);
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
@@ -95,11 +101,11 @@ public class BuyDataPackPage {
             clickElement(detailLocator, "Details");
             completePurchaseFlow1();
         } catch (Exception e) {
-            takeScreenshot(" Topsellers");
-            Assert.fail("Failed in  Topsellers: " + e.getMessage());
+            takeScreenshot("Topsellers");
+            Assert.fail("Failed in Topsellers: " + e.getMessage());
         }
     }
-    
+
     public void sidhaon() {
         try {
             clickElement(sidhaonLocator, "sidhaon");
@@ -112,10 +118,10 @@ public class BuyDataPackPage {
             completePurchaseFlow1();
         } catch (Exception e) {
             takeScreenshot("sidhaon");
-            Assert.fail("Failed in  sidhaon: " + e.getMessage());
+            Assert.fail("Failed in sidhaon: " + e.getMessage());
         }
     }
-    
+
     public void onethreedays() {
         try {
             clickElement(onetothreedayLocator, "onetothreeday");
@@ -128,15 +134,14 @@ public class BuyDataPackPage {
             completePurchaseFlow1();
         } catch (Exception e) {
             takeScreenshot("onethreedays");
-            Assert.fail("Failed in  onethreedays: " + e.getMessage());
+            Assert.fail("Failed in onethreedays: " + e.getMessage());
         }
     }
 
     public void sevenday() {
         try {
-
             clickElement(sevendayLocator, "seven");
-        	Thread.sleep(8000);
+            Thread.sleep(8000);
             clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
@@ -152,12 +157,12 @@ public class BuyDataPackPage {
     public void twentyeightdays() {
         try {
             clickElement(twentyeightdayLocator, "28 Days");
-           	Thread.sleep(8000);
-           	clickElement(thirtydayrenewelLocator, "thirtydayrenewel");
+            Thread.sleep(8000);
+            clickElement(thirtydayrenewelLocator, "thirtydayrenewel");
             clickElement(cancelLocator, "Cancel Button");
             Thread.sleep(4000);
             clickElement(thirtydayonetimeLocator, "thirtydayonetimeLocator");
-            clickElement(buyPackLocator1,"buyPack");
+            clickElement(buyPackLocator1, "buyPack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm Payment");
             clickElement(noLocator, "No Button");
@@ -170,8 +175,8 @@ public class BuyDataPackPage {
     public void eightyfourdays() {
         try {
             clickElement(eightyfourdayLocator, "84 Days");
-        	Thread.sleep(8000);
-        	 clickElement(buyPackLocator, "Buy Pack");
+            Thread.sleep(8000);
+            clickElement(buyPackLocator, "Buy Pack");
             clickElement(paymentMethodLocator, "Pay By Balance");
             clickElement(confirmLocator, "Confirm");
             clickElement(noLocator, "No Button");
@@ -182,7 +187,6 @@ public class BuyDataPackPage {
             Assert.fail("Failed in eightyfourday: " + e.getMessage());
         }
     }
-
 
     private void completePurchaseFlow1() throws InterruptedException {
         clickElement(buyPackLocator1, "Buy Button in Details");
@@ -206,11 +210,11 @@ public class BuyDataPackPage {
                         break;
                     }
                 }
-                System.out.println("Swipe " + (i + 1) + ": '" + name + "' not visible yet.");
+                logger.info("Swipe {}: '{}' not visible yet.", i + 1, name);
                 swipeUp();
                 waitAfterSwipe();
             } catch (Exception e) {
-                System.out.println("Swipe failed at attempt " + (i + 1) + ": " + e.getMessage());
+                logger.warn("Swipe failed at attempt {}: {}", i + 1, e.getMessage());
             }
         }
 
@@ -243,17 +247,28 @@ public class BuyDataPackPage {
         }
     }
 
-    private void takeScreenshot(String fileName) {
+    private void takeScreenshot(String screenshotName) {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
+
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String destinationPath = "screenshots/" + screenshotName + "_" + timestamp + ".png";
+
+        File screenshotDirectory = new File("screenshots");
+        if (!screenshotDirectory.exists()) {
+            boolean dirCreated = screenshotDirectory.mkdirs();
+            if (dirCreated) {
+                logger.info("Screenshots directory created.");
+            } else {
+                logger.warn("Failed to create screenshots directory.");
+            }
+        }
+
         try {
-            File screenshot = driver.getScreenshotAs(OutputType.FILE);
-            File destinationFile = new File(screenshotPath + fileName + ".png");
-            Files.createDirectories(destinationFile.getParentFile().toPath());
-            Files.copy(screenshot.toPath(), destinationFile.toPath());
-            System.out.println("Screenshot saved: " + destinationFile.getAbsolutePath());
+            Files.copy(srcFile.toPath(), Paths.get(destinationPath));
+            logger.info("Screenshot saved at: {}", destinationPath);
         } catch (IOException e) {
-            System.out.println("Screenshot error: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Unexpected error while taking screenshot: " + e.getMessage());
+            logger.error("Failed to save screenshot: {}", e.getMessage());
         }
     }
 
@@ -262,12 +277,10 @@ public class BuyDataPackPage {
             WebDriverWait wait = new WebDriverWait(driver, 30);
             MobileElement element = (MobileElement) wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             element.click();
-            System.out.println("Clicked: " + elementName);
+            logger.info("Clicked: {}", elementName);
         } catch (Exception e) {
             takeScreenshot("Error_" + elementName.replace(" ", "_"));
             Assert.fail("Failed to click on: " + elementName + " - " + e.getMessage());
         }
     }
 }
-
-   

@@ -3,15 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Test.RechargeTest">
+      <class name="Test.RecommendedRenewelPackTest">
         <methods>
+          <include name="sendAutomationReports"/>
           <include name="closeReport"/>
-          <include name="rechargeTest"/>
-          <include name="tearDown"/>
           <include name="initializeReport"/>
+          <include name="recommendedRenewalPackTest"/>
+          <include name="tearDown"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- Test.RechargeTest -->
+      </class> <!-- Test.RecommendedRenewelPackTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -5,7 +5,7 @@
     </listeners>
     <test name="App Tests">
         <classes>
-            <class name="Test.NcellNSLTest"/>
+            <class name="Test.BeemaPackTest"/>
         </classes>
     </test>
 </suite>

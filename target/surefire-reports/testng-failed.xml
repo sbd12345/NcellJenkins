@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Surefire suite]" verbose="0">
+  <test thread-count="5" name="Surefire test(failed)" verbose="0">
+    <classes>
+      <class name="Test.WificallingTest">
+        <methods>
+          <include name="testhwificalling"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.WificallingTest -->
+      <class name="Test.BestOfferTest">
+        <methods>
+          <include name="testBuyPackDirectly"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.BestOfferTest -->
+      <class name="Test.freesmsTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="test"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.freesmsTest -->
+      <class name="Test.AppOnlyOfferTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="AppOnlyOffer"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.AppOnlyOfferTest -->
+      <class name="Test.GuessandwinTest">
+        <methods>
+          <include name="setUpPage"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="testGuessAndWinSubmission"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.GuessandwinTest -->
+      <class name="Base.BaseTest">
+        <methods>
+          <include name="closeReport"/>
+        </methods>
+      </class> <!-- Base.BaseTest -->
+      <class name="Test.MyNcellServiceTest">
+        <methods>
+          <include name="testPinPukQuery"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="testEmergencyServices"/>
+          <include name="testTollFreeNumbers"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="testEsim"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.MyNcellServiceTest -->
+      <class name="Test.PlaygameTest">
+        <methods>
+          <include name="testOpenTimberGuyGame"/>
+          <include name="testOpenCarromHeroGame"/>
+          <include name="testOpenChangaChaitGame"/>
+          <include name="testOpenStickyGooGame"/>
+          <include name="testOpenPoliceGame"/>
+          <include name="testOpenCandyFiestaGame"/>
+          <include name="testOpenLudoWithFriendsGame"/>
+          <include name="setUpPage"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.PlaygameTest -->
+      <class name="Test.RechargeTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="rechargeTest"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.RechargeTest -->
+      <class name="Test.DoubleDataOfferTest">
+        <methods>
+          <include name="testActivate30DayRenewal"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="setUpPage"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.DoubleDataOfferTest -->
+      <class name="Test.NcellPurpleLeagueTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="openNcellPurpleLeague"/>
+          <include name="closeReport"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.NcellPurpleLeagueTest -->
+      <class name="Test.TakeSaapatiTest">
+        <methods>
+          <include name="testhwificalling"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.TakeSaapatiTest -->
+      <class name="Test.RoamingTest">
+        <methods>
+          <include name="testActivate30DayRenewal"/>
+          <include name="setUpPage"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.RoamingTest -->
+      <class name="Test.creditmeTest">
+        <methods>
+          <include name="test"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.creditmeTest -->
+      <class name="Test.buyvoicepackTest">
+        <methods>
+          <include name="testThreeToSevenDay"/>
+          <include name="testIndiaIldDays"/>
+          <include name="testTwentyEightDays"/>
+          <include name="testEightyFourDays"/>
+          <include name="testAllProduct"/>
+          <include name="beforeMethod"/>
+          <include name="testSpecialOffer"/>
+          <include name="closeReport"/>
+          <include name="testHourlyOneDay"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+          <include name="setUpPage"/>
+        </methods>
+      </class> <!-- Test.buyvoicepackTest -->
+      <class name="Test.HistoryandFavouriteTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="HistoryandFavouriteTest"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.HistoryandFavouriteTest -->
+      <class name="Test.BuyDataPackTest">
+        <methods>
+          <include name="testEightyFourDays"/>
+          <include name="testDoubleData"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+          <include name="testTopSellers"/>
+          <include name="testRenewalPack"/>
+          <include name="setUpPage"/>
+          <include name="beforeMethod"/>
+          <include name="onethreedays"/>
+          <include name="testSevenDay"/>
+          <include name="sidhaon"/>
+          <include name="closeReport"/>
+          <include name="testTwentyEightDays"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- Test.BuyDataPackTest -->
+      <class name="Test.ResourceExchangeTest">
+        <methods>
+          <include name="test"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.ResourceExchangeTest -->
+      <class name="Test.RecommendedRenewelPackTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="recommendedRenewalPackTest"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.RecommendedRenewelPackTest -->
+      <class name="Test.NcellNSLTest">
+        <methods>
+          <include name="FantasyLeague"/>
+          <include name="Spinandwin"/>
+          <include name="NSLLiveMatch"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="DigitalLeague"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.NcellNSLTest -->
+      <class name="Test.SearchBoxTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="searchBoxTest"/>
+          <include name="closeReport"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.SearchBoxTest -->
+      <class name="Test.RechargeforOtherTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="testrecharge"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.RechargeforOtherTest -->
+      <class name="Test.BeemaPackTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="testbeemapackcalling"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.BeemaPackTest -->
+      <class name="Test.HDVoiceTest">
+        <methods>
+          <include name="testhdvoiceDirectly"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.HDVoiceTest -->
+      <class name="Test.UtilityTest">
+        <methods>
+          <include name="openShareMarketLiveTest"/>
+          <include name="openEplLiveScoreTest"/>
+          <include name="openNepaliNewsTest"/>
+          <include name="openWeatherTest"/>
+          <include name="beforeMethod"/>
+          <include name="openGoldSilverPriceTest"/>
+          <include name="closeReport"/>
+          <include name="openHoroscopeTest"/>
+          <include name="openExchangeRateTest"/>
+          <include name="initializeReport"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.UtilityTest -->
+      <class name="Test.PartnerServiceTest">
+        <methods>
+          <include name="openHungamaTest"/>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="openUnlimitedContentsTest"/>
+          <include name="openMeroSchoolTest"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.PartnerServiceTest -->
+      <class name="Test.GiftaPackTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="closeReport"/>
+          <include name="test"/>
+          <include name="tearDown"/>
+          <include name="initializeReport"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- Test.GiftaPackTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->
