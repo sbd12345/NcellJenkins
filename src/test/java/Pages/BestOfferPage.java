@@ -77,18 +77,6 @@ public class BestOfferPage {
         }
     }
 
-    public void reuse() {
-        try {
-            clickElement(paymentMethodLocator, "Pay By Balance");
-            clickElement(confirmLocator, "Confirm Payment");
-            clickElement(noLocator, "No Button to Close Confirmation");
-        } catch (Exception e) {
-            logger.error("Error in reuse flow: {}", e.getMessage());
-            takeScreenshot("reuse_error");
-            Assert.fail("Error in reuse flow: " + e.getMessage());
-        }
-    }
-
     // --- Core utilities ---
 
     private void clickElementWithSwipe(By locator, String name) {
