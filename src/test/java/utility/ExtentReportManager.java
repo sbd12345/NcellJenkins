@@ -8,7 +8,7 @@ public class ExtentReportManager {
 
     public static ExtentReports getInstance() {
         if (extent == null) {
-            String reportPath = System.getProperty("user.dir") + "/ExtentReports/ExtentReport.html";
+            String reportPath = System.getProperty("user.dir") + "/Extent Report/ExtentReport.html";
             ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
 
             reporter.config().setDocumentTitle("Ncell Automation Report");
